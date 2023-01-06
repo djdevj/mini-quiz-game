@@ -1,8 +1,20 @@
+// GIVEN I am taking a code quiz
+// WHEN I click the start button
+// THEN a timer starts and I am presented with a question
+// WHEN I answer a question
+// THEN I am presented with another question
+// WHEN I answer a question incorrectly
+// THEN time is subtracted from the clock
+// WHEN all questions are answered or the timer reaches 0
+// THEN the game is over
+// WHEN the game is over
+// THEN I can save my initials and my score
+
 // select all elements
 const start = document.getElementById("start");
 const quiz = document.getElementById("quiz");
 const question = document.getElementById("question");
-const qImg = document.getElementById("qImg");
+
 const choiceA = document.getElementById("A");
 const choiceB = document.getElementById("B");
 const choiceC = document.getElementById("C");
@@ -14,27 +26,75 @@ const scoreDiv = document.getElementById("scoreContainer");
 // create our questions
 let questions = [
     {
-        question : "What does HTML stand for?",
-        imgSrc : "img/html.png",
-        choiceA : "Correct",
-        choiceB : "Wrong",
-        choiceC : "Wrong",
-        correct : "A"
-    },{
-        question : "What does CSS stand for?",
-        imgSrc : "img/css.png",
-        choiceA : "Wrong",
-        choiceB : "Correct",
-        choiceC : "Wrong",
+        question : "What does the 'M' mean in HTML?",
+        choiceA : "Marketable",
+        choiceB : "Markup",
+        choiceC : "Markdown",
         correct : "B"
     },{
+        question : "All HTML documents must start with what document type declaration?",
+        choiceA : "!DOCTYPE html",
+        choiceB : "!DOCUMENT html",
+        choiceC : "!TYPEDOC html",
+        correct : "A"
+    },{
         question : "What does JS stand for?",
-        imgSrc : "img/js.png",
-        choiceA : "Wrong",
-        choiceB : "Wrong",
-        choiceC : "Correct",
+        
+        choiceA : "JavaSection",
+        choiceB : "JusSayin",
+        choiceC : "JavaScript",
         correct : "C"
+    },{
+        question : "What is the correct P-tag?",
+        
+        choiceA : "p-tag",
+        choiceB : "paragraph",
+        choiceC : "p",
+        correct : "C"
+    },{
+        question : "What is the correct HTML link tag?",
+        
+        choiceA : "a href=",
+        choiceB : "link",
+        choiceC : "a link=",
+        correct : "A"
+    },{
+        question : "CSS stands for _____ Style Sheets.",
+        
+        choiceA : "Common",
+        choiceB : "Comprehensive",
+        choiceC : "Cascading",
+        correct : "C"
+    },{
+        question : "Python is a popular programming _____.",
+        
+        choiceA : "Method",
+        choiceB : "Language",
+        choiceC : "Application",
+        correct : "B"
+    },{
+        question : "How do you get updated GitHub repo information?",
+        
+        choiceA : "get update",
+        choiceB : "git pull",
+        choiceC : "git update",
+        correct : "B"
+    },{
+        question : "How do you update your GitHub repo?",
+        
+        choiceA : "git pull",
+        choiceB : "git commit",
+        choiceC : "git push",
+        correct : "C"
+    },{
+        question : "The HTML _____ tag is used to define a client-side script.",
+        
+        choiceA : "script",
+        choiceB : "scropt",
+        choiceC : "scripts",
+        correct : "A"
     }
+    
 ];
 
 // create some variables
@@ -42,7 +102,7 @@ let questions = [
 const lastQuestion = questions.length - 1;
 let runningQuestion = 0;
 let count = 0;
-const questionTime = 10; // 10s
+const questionTime = 60; // 60s
 const gaugeWidth = 150; // 150px
 const gaugeUnit = gaugeWidth / questionTime;
 let TIMER;
@@ -53,7 +113,6 @@ function renderQuestion(){
     let q = questions[runningQuestion];
     
     question.innerHTML = "<p>"+ q.question +"</p>";
-    qImg.innerHTML = "<img src="+ q.imgSrc +">";
     choiceA.innerHTML = q.choiceA;
     choiceB.innerHTML = q.choiceB;
     choiceC.innerHTML = q.choiceC;
@@ -140,14 +199,10 @@ function scoreRender(){
     
     // calculate the amount of question percent answered by the user
     const scorePerCent = Math.round(100 * score/questions.length);
-    
-    // choose the image based on the scorePerCent
-    let img = (scorePerCent >= 80) ? "img/5.png" :
-              (scorePerCent >= 60) ? "img/4.png" :
-              (scorePerCent >= 40) ? "img/3.png" :
-              (scorePerCent >= 20) ? "img/2.png" :
-              "img/1.png";
-    
-    scoreDiv.innerHTML = "<img src="+ img +">";
     scoreDiv.innerHTML += "<p>"+ scorePerCent +"%</p>";
+    
+// Give option for user to restart game
+// Give user option to record name
+    
+    
 }

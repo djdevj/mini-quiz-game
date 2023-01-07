@@ -101,7 +101,7 @@ let questions = [
 
 const lastQuestion = questions.length - 1;
 let runningQuestion = 0;
-let count = 0;
+let count = 60;
 const questionTime = 60; // 60s
 const gaugeWidth = 150; // 150px
 const gaugeUnit = gaugeWidth / questionTime;
@@ -140,10 +140,10 @@ function renderProgress(){
 // counter render
 
 function renderCounter(){
-    if(count <= questionTime){
+    if(count > 0){
         counter.innerHTML = count;
         timeGauge.style.width = count * gaugeUnit + "px";
-        count++
+        count--
     }else{
         count = 0;
         // change progress color to red
@@ -172,7 +172,7 @@ function checkAnswer(answer){
         // change progress color to red
         answerIsWrong();
     }
-    count = 0;
+    // count = 0;
     if(runningQuestion < lastQuestion){
         runningQuestion++;
         renderQuestion();
@@ -199,7 +199,17 @@ function scoreRender(){
     
     // calculate the amount of question percent answered by the user
     const scorePerCent = Math.round(100 * score/questions.length);
-    scoreDiv.innerHTML += "<p>"+ scorePerCent +"%</p>";
+    var scoreEl = document.createElement('p')
+    scoreEl.textContent = scorePerCent + '%'
+    scoreDiv.appendChild(scoreEl)
+    var restart = document.createElement('button')
+    restart.textContent = 'Restart Game'
+    scoreDiv.appendChild(restart)
+    restart.addEventListener('click', function (){
+        window.location.reload()
+    }) 
+    
+    // scoreDiv.innerHTML += "<p>"+ scorePerCent +"%</p>";
     
 // Give option for user to restart game
 // Give user option to record name
